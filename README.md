@@ -4,9 +4,22 @@ Claude Code (claude.ai/code) で使用するカスタムコマンドのコレク
 
 ## インストール方法
 
-このコマンドを使用するには、以下のディレクトリに配置してください：
+### 自動セットアップ（推奨）
+
+```bash
+# リポジトリをクローン
+git clone https://github.com/username/rtoya-claudecode-custom-commands.git
+cd rtoya-claudecode-custom-commands
+
+# セットアップスクリプトを実行
+./setup.sh
 ```
-~/.claude/commands/rtoya-claudecode-custom-commands/
+
+### 手動セットアップ
+
+```bash
+# シンボリックリンクを手動で作成
+ln -s /path/to/rtoya-claudecode-custom-commands/rtoya-claudecode-custom-commands ~/.claude/commands/rtoya-claudecode-custom-commands
 ```
 
 ## 利用可能なコマンド
@@ -14,58 +27,22 @@ Claude Code (claude.ai/code) で使用するカスタムコマンドのコレク
 ### 🔍 Code Review Helper (`code-review`)
 コードレビューに必要な情報を収集し、レビューのチェックポイントを表示します。
 
-**使用法:** `/project:code-review <filepath>`
-
-**機能:**
-- ファイル分析（タイプ、行数、プレビュー）
-- コードの可読性チェック
-- セキュリティレビューポイント
-- パフォーマンス考慮事項
-- テストカバレッジチェック
+**使用法:** `code-review <filepath>`
 
 ### 📊 Git Summary (`git-summary`)
 プロジェクトのGit状態を包括的に表示します。
 
-**使用法:** `/project:git-summary`
-
-**機能:**
-- 現在のブランチ表示
-- 作業ツリーの状態確認
-- 最近のコミット履歴（直近5件）
-- リモートリポジトリ情報
+**使用法:** `git-summary`
 
 ### 📝 Quick Note Creator (`quick-note`)
 引数として渡されたテキストを素早くノートファイルに保存します。
 
-**使用法:** `/user:quick-note <テキスト>`
-
-**機能:**
-- タイムスタンプ付きノートの自動保存
-- `~/quick-notes/` ディレクトリに日付別ファイル作成
-- ファイル命名規則: `notes-YYYYMMDD.txt`
+**使用法:** `quick-note <テキスト>`
 
 ### 💻 System Information (`system-info`)
 システム情報を表示します。現在の環境やディレクトリを確認したいときに使用。
 
-**使用法:** `/project:system-info`
-
-**機能:**
-- OS情報（uname -a）
-- 現在のディレクトリとユーザー
-- 主要な環境変数（HOME、SHELL）
-- システムの日時
-
-## コマンドカテゴリ
-
-### Project Commands (`/project:`)
-プロジェクト/リポジトリ固有の操作を行うコマンド：
-- `code-review` - コードレビュー支援
-- `git-summary` - Git状態確認
-- `system-info` - システム情報表示
-
-### User Commands (`/user:`)
-ユーザー固有のユーティリティコマンド：
-- `quick-note` - クイックノート作成
+**使用法:** `system-info`
 
 ## 技術仕様
 
@@ -98,16 +75,16 @@ Claude Code (claude.ai/code) で使用するカスタムコマンドのコレク
 
 ```bash
 # コードレビューの実行
-/project:code-review src/main.js
+code-review src/main.js
 
 # Git状態の確認
-/project:git-summary
+git-summary
 
 # クイックノートの作成
-/user:quick-note 本日のタスク完了、明日はテスト実装予定
+quick-note 本日のタスク完了、明日はテスト実装予定
 
 # システム情報の確認
-/project:system-info
+system-info
 ```
 
 ## 注意事項

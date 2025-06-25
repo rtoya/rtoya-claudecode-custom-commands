@@ -2,7 +2,7 @@
 
 コードレビューに必要な情報を収集し、レビューのチェックポイントを表示します。
 
-引数でファイルパスを指定できます: `/project:code-review src/main.js`
+引数でファイルパスを指定できます: `code-review src/main.js`
 
 ## レビューチェックポイント
 
@@ -40,5 +40,5 @@
 !  echo "🔍 File content preview (first 20 lines):"
 !  head -20 "$ARGUMENTS" 2>/dev/null || echo "Cannot preview file"
 !else
-!  echo "使用例: /project:code-review <filepath>"
+!  echo "使用例: code-review <filepath>"
 !fi
