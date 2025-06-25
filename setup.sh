@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Claude Code カスタムコマンド セットアップスクリプト
-# このスクリプトは ~/.claude/commands/ にシンボリックリンクを作成します
+# このスクリプトは ~/.claude/commands/ に個別ファイルをコピーします
 
 set -e
 
@@ -23,31 +23,23 @@ if [ ! -d "$SOURCE_DIR" ]; then
     exit 1
 fi
 
-# ディレクトリ全体のシンボリックリンクを作成
-echo "🔗 コマンドディレクトリのシンボリックリンクを作成しています..."
-target_dir="$COMMANDS_DIR/rtoya-claudecode-custom-commands"
-
-# 既存のリンクがある場合は削除
-if [ -L "$target_dir" ]; then
-    echo "🗑️  既存のリンク rtoya-claudecode-custom-commands を削除しています..."
-    rm "$target_dir"
-fi
-
-echo "🔗 rtoya-claudecode-custom-commands ディレクトリをリンクしています..."
-ln -s "$SOURCE_DIR" "$target_dir"
+# 個別ファイルをコピー
+echo "📋 コマンドファイルをコピーしています..."
+for file in "$SOURCE_DIR"/*.md; do
+    if [ -f "$file" ]; then
+        filename=$(basename "$file")
+        echo "  - $filename"
+        cp "$file" "$COMMANDS_DIR/"
+    fi
+done
 
 # 確認
-if [ -L "$target_dir" ]; then
-    echo "✅ セットアップが完了しました！"
-    echo "📍 ソースディレクトリ: $SOURCE_DIR"
-    echo "🎯 コマンドディレクトリ: $target_dir"
-    echo ""
-    echo "利用可能なコマンド:"
-    echo "  code-review <filepath>"
-    echo "  git-summary"
-    echo "  system-info"
-    echo "  quick-note <テキスト>"
-else
-    echo "❌ シンボリックリンクの作成に失敗しました。"
-    exit 1
-fi
+echo "✅ セットアップが完了しました！"
+echo "📍 ソースディレクトリ: $SOURCE_DIR"
+echo "🎯 コマンドディレクトリ: $COMMANDS_DIR"
+echo ""
+echo "利用可能なコマンド（全リポジトリで使用可能）:"
+echo "  /user:code-review <filepath>"
+echo "  /user:git-summary"
+echo "  /user:system-info"
+echo "  /user:quick-note <テキスト>"

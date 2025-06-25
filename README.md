@@ -2,6 +2,11 @@
 
 Claude Code (claude.ai/code) で使用するカスタムコマンドのコレクションです。開発作業を効率化するためのツールを提供します。
 
+**特徴:**
+- 全リポジトリで利用可能な個人用コマンド
+- 日本語インターフェース
+- 実行可能なシェルコマンド付きドキュメント
+
 ## インストール方法
 
 ### 自動セットアップ（推奨）
@@ -18,8 +23,8 @@ cd rtoya-claudecode-custom-commands
 ### 手動セットアップ
 
 ```bash
-# シンボリックリンクを手動で作成
-ln -s /path/to/rtoya-claudecode-custom-commands/rtoya-claudecode-custom-commands ~/.claude/commands/rtoya-claudecode-custom-commands
+# コマンドファイルを手動でコピー
+cp rtoya-claudecode-custom-commands/*.md ~/.claude/commands/
 ```
 
 ## 利用可能なコマンド
@@ -27,22 +32,22 @@ ln -s /path/to/rtoya-claudecode-custom-commands/rtoya-claudecode-custom-commands
 ### 🔍 Code Review Helper (`code-review`)
 コードレビューに必要な情報を収集し、レビューのチェックポイントを表示します。
 
-**使用法:** `code-review <filepath>`
+**使用法:** `/user:code-review <filepath>`
 
 ### 📊 Git Summary (`git-summary`)
 プロジェクトのGit状態を包括的に表示します。
 
-**使用法:** `git-summary`
+**使用法:** `/user:git-summary`
 
 ### 📝 Quick Note Creator (`quick-note`)
 引数として渡されたテキストを素早くノートファイルに保存します。
 
-**使用法:** `quick-note <テキスト>`
+**使用法:** `/user:quick-note <テキスト>`
 
 ### 💻 System Information (`system-info`)
 システム情報を表示します。現在の環境やディレクトリを確認したいときに使用。
 
-**使用法:** `system-info`
+**使用法:** `/user:system-info`
 
 ## 技術仕様
 
@@ -61,7 +66,7 @@ ln -s /path/to/rtoya-claudecode-custom-commands/rtoya-claudecode-custom-commands
 ## 開発者向け情報
 
 ### 新しいコマンドの追加
-1. 適切なスコープ（`project:` または `user:`）を選択
+1. ファイル冒頭にFrontmatterメタデータ（name, description）を記述
 2. 既存の日本語ドキュメント形式を維持
 3. `!` プレフィックスを使用したシェルコマンドを実装
 4. エラーハンドリングを含める
@@ -75,16 +80,16 @@ ln -s /path/to/rtoya-claudecode-custom-commands/rtoya-claudecode-custom-commands
 
 ```bash
 # コードレビューの実行
-code-review src/main.js
+/user:code-review src/main.js
 
 # Git状態の確認
-git-summary
+/user:git-summary
 
 # クイックノートの作成
-quick-note 本日のタスク完了、明日はテスト実装予定
+/user:quick-note 本日のタスク完了、明日はテスト実装予定
 
 # システム情報の確認
-system-info
+/user:system-info
 ```
 
 ## 注意事項

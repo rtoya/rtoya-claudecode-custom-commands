@@ -17,13 +17,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ### code-review.md
 - **目的**: コードレビューヘルパー - ファイル分析とレビューチェックリストを提供
-- **使用法**: `/project:code-review <filepath>`
+- **使用法**: `/user:code-review <filepath>`
 - **機能**: ファイル分析、セキュリティレビューポイント、パフォーマンス考慮事項、テストカバレッジチェック
 - **言語**: 日本語インターフェースで包括的なレビュー基準を提供
 
 ### git-summary.md  
 - **目的**: Gitリポジトリの状態概要を表示
-- **使用法**: `/project:git-summary`
+- **使用法**: `/user:git-summary`
 - **機能**: 現在のブランチ、作業ツリーの状態、最近のコミット、リモート情報
 - **出力**: 絵文字付きの状態表示
 
@@ -35,21 +35,23 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ### system-info.md
 - **目的**: システム情報の表示
-- **使用法**: `/project:system-info`
+- **使用法**: `/user:system-info`
 - **機能**: OS情報、現在のディレクトリ、ユーザー情報、環境変数
 
-## コマンドカテゴリ
+## 利用可能なコマンド一覧
 
-コマンドはスコープ別に整理されています：
-- **project:** コマンド (`code-review`, `git-summary`, `system-info`) - プロジェクト/リポジトリ固有
-- **user:** コマンド (`quick-note`) - ユーザー固有のユーティリティ
+すべてのコマンドは `/user:コマンド名` の形式で実行できます（全リポジトリで使用可能）：
+- `/user:code-review <filepath>` - コードレビューヘルパー
+- `/user:git-summary` - Gitリポジトリ状態表示
+- `/user:quick-note <テキスト>` - クイックノート作成
+- `/user:system-info` - システム情報表示
 
 ## シェルコマンドパターン
 
-すべての実行可能コマンドは、マークダウンファイル内でのシェル実行に`!`プレフィックスパターンを使用します。これにより、Claude Codeがこれらのカスタムコマンドファイルを処理する際にコマンドを実行できます。
+すべての実行可能コマンドは、マークダウンファイル内でのシェル実行に`!`プレフィックスパターンを使用します。コマンドは`~/.claude/commands/`に個別ファイルとして配置され、全リポジトリで利用可能です。
 
 ## 開発に関する注意事項
 
 - コマンドファイルを編集する際は、既存の日本語ドキュメント形式を維持してください
-- 新しいコマンドを追加する場合は、適切なスコープ（project:またはuser:）を選択してください
+- 新しいコマンドを追加する場合は、ファイル冒頭にFrontmatterメタデータ（name, description）を記述してください
 - シェルコマンドは`!`プレフィックスを使用し、エラーハンドリングを含めてください
